@@ -25,13 +25,14 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   background: var(--cream);
   color: var(--ink);
   font-family: var(--sans);
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -60,12 +61,15 @@ body {
 .stage {
   position: relative;
   z-index: 2;
+  width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 24px;
+  overflow-x: hidden;
 }
 
 .view {
@@ -75,6 +79,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.view[hidden] {
+  display: none !important;
 }
 
 .eyebrow {
@@ -125,8 +133,10 @@ body {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 14px;
-  padding: 30px 22px;
+  gap: clamp(6px, 3vw, 14px);
+  width: 100%;
+  max-width: 420px;
+  padding: clamp(18px, 6vw, 30px) clamp(10px, 4vw, 22px);
   background: var(--paper);
   border: 1px solid rgba(184, 148, 95, 0.35);
   border-radius: 4px;
@@ -137,13 +147,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 56px;
+  min-width: 0;
+  flex: 1 1 0;
 }
 
 .cd-num {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(30px, 7vw, 46px);
+  font-size: clamp(22px, 7vw, 46px);
   line-height: 1;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
@@ -151,17 +162,19 @@ body {
 
 .cd-label {
   margin-top: 6px;
-  font-size: 10px;
-  letter-spacing: 0.18em;
+  font-size: clamp(8px, 2vw, 10px);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-soft);
+  white-space: nowrap;
 }
 
 .cd-sep {
   font-family: var(--serif);
-  font-size: clamp(20px, 4vw, 28px);
+  font-size: clamp(16px, 4vw, 28px);
   color: var(--gold);
   transform: translateY(-6px);
+  flex: 0 0 auto;
 }
 
 /* ==========================================================================
@@ -373,8 +386,7 @@ body {
    Responsive
    ========================================================================== */
 @media (max-width: 380px) {
-  .countdown { gap: 8px; padding: 22px 12px; }
-  .cd-unit { min-width: 46px; }
+  .countdown { gap: 6px; padding: 16px 10px; }
 }
 
 /* keyboard focus visibility */
@@ -382,5 +394,4 @@ body {
 .cta-button:focus-visible {
   outline: 2px solid var(--wax);
   outline-offset: 3px;
-  }
-  
+}
